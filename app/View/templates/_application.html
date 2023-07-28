@@ -1,0 +1,48 @@
+<table class = "posttable" style = "width:100%" valign="top">
+    <tr> 
+        <td colspan="3"><div> Position: {{ application.post.title }}  </div>
+        </td>
+    </tr>
+    <tr>
+        <td width="75%" >
+            <div class="postmessage">
+               Applicant Name: {{ application.applicant_name }}
+           </div>
+           <div>
+               Reference Name: {{ application.reference_name }}
+           </div>
+           <div>
+               Reference Email: {{ application.reference_email }}
+            </div>
+            <div>
+                Application Body: {{ application.application_body }}
+            </div>
+            <div>
+                Application Status: {{ application.application_status }}
+            </div>
+            
+            <td width = "10%"> 
+                <br> 
+                {% if current_user.role == 'Student' %}
+                <form action="{{ url_for('routes.remove_application', application_id = application.id)}}" method="post">
+                    <input type="submit" value="Withdrawl" class="button" >
+                </form>
+                {% endif %}
+
+                {% if current_user.role == 'Faculty' %}
+                    <form action="{{ url_for('routes.show_StudentProfile', application_id = application.id) }}" method="post">
+                        <input type="submit" value="View Student Profile" class="button2">
+                    </form>
+                    {% if application.application_status == "Pending..." %}
+                        <form action="{{ url_for('routes.accept_application', application_id = application.id) }}" method="post">
+                            <input type="submit" value="Accept" class="button">
+                        </form>
+                            <form action="{{ url_for('routes.reject_application', application_id = application.id) }}" method="post">
+                        <input type="submit" value="Reject" class="button">
+                        </form>
+                    {%endif%}
+                {% endif %}
+                
+            </td>
+        </td>
+</table>

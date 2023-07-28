@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1> {{ title }} </h1>
+    <br>
+
+    <div class = "fontcheck"> Faculty Username: {{ user.username }} 
+    <br> 
+                Email: {{ user.email }} 
+    <br> 
+                Phone Number: {{ user.phone }}
+   
+    
+    </div>
+
+    <br>
+    
+    <td><a href="{{ url_for('routes.edit_faculty_profile') }}" class="button"> Edit Profile </a></td>
+
+{% endblock %}

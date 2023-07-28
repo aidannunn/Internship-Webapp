@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1> {{ title }} </h1>
+    <br>
+
+    <div class = "fontcheck"> Student Name: {{ user.username }} 
+    <br> 
+                Email: {{ user.email }} 
+    <br> 
+                Student's Major: {{ user.major }}
+    <br> 
+                Student's GPA: {{ user.gpa }}
+    <br>
+    <br>
+
+    
+    Completed Courses: {% for course in user.get_electives() %}
+                       <li>{{ course.title}}</li>
+                       {% endfor %}
+
+    <br> 
+    Interested Fields: {% for field in user.get_fields().all() %}
+                       <li>{{ field.name }}</li>
+                       {%endfor%}
+    <br>        
+    Known Languages: {% for language in user.get_languages().all() %}
+                    <li>{{ language.name }}</li>
+                     {%endfor%}
+    <br> 
+
+                Prior Research Experience: {{ user.prior_research_experience }}
+    
+    </div>
+
+    <br>
+    {% if current_user.role == 'Student' %}
+        <td><a href="{{ url_for('routes.edit_student_profile') }}" class="button"> Edit Profile </a></td>
+    {% endif %}
+{% endblock %}

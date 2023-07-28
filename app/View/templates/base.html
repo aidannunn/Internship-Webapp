@@ -1,0 +1,51 @@
+<html class = nav-container2>
+    <head>
+        <title> Research Hub </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+
+    <body>
+        <div class = "nav-container">
+            <table>
+                <tr>
+                    <td><a href="{{ url_for('routes.index') }}" class="button"> Research Positions </a></td>
+
+                    {% if current_user.role == 'Faculty' %}
+                    <td><a href="{{ url_for('routes.post_position') }}" class="button"> Post New Research Position </a></td>
+                    <td><a href="{{ url_for('routes.view_applications', current_user_id = current_user.id) }}" class="button"> View Submitted Applications </a></td>
+                    {% elif current_user.role == 'Student' %}
+                    <td><a href="{{ url_for('routes.view_applications', current_user_id = current_user.id) }}" class="button"> View Pending Applications </a></td>
+                    {% endif %}
+
+                    {% if current_user.role == 'Student'%}
+                    <td><a href="{{ url_for('routes.display_StudentProfile') }}" class = "button"> View Profile </a></td>
+                    {% elif current_user.role == 'Faculty' %}
+                    <td><a href="{{ url_for('routes.display_FacultyProfile') }}" class = "button"> View Profile </a></td>
+                    {% endif %}
+
+                    {% if current_user.is_anonymous %}
+                    <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
+                    <td> Current user is: <span class="useritem">________ </span> </td>
+                    {% else %}
+                    <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
+                    <td> Current user is: <span class="useritem">{{ current_user }} </span> </td>
+                    {% endif %}
+
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="flash-container"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% block content %} {% endblock %}
+        </div>
+
+    </body>
+</html>

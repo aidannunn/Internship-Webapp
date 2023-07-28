@@ -1,0 +1,58 @@
+<table class = "posttable" style = "width:100%" valign="top">
+    <tr> 
+        <td colspan="3"><div> {{post.title}} </div>
+        </td>
+    </tr>
+    <tr>
+
+        <td width="80%" >
+            <div class="postmessage">
+              {{ post.general_description }}
+           </div>
+           <div>
+               Commitment: {{ post.time_commitment }}
+            </div>
+            <div>
+                Timeframe: {{ post.start_date }} - {{ post.end_date }}
+            </div>
+            <div>
+                Required Qualifications: {{ post.qualifications }}
+            </div>
+            <div>
+                {{ post.faculty_name }}
+            </div>
+            <div>
+                Contact Here: {{ post.contact_information }}
+            </div>
+            
+            <td width = "5%"> 
+                <br> 
+                 <!-- if the post is posted by the logged in user, include the "delete" button.  
+                                   Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
+                                   Style the submit button using `button` CCS class selector. -->
+                    {% if current_user == post.writer %}
+                    <form action="{{ url_for('routes.delete', post_id = post.id) }}" method="post">
+                        <input type="submit" value="Delete" class="button" >
+                    </form>
+                    {%endif%}
+                    
+                    {% if current_user.role == "Student"%}
+                    <form action="{{ url_for('routes.post_application', post_id = post.id) }}" method="post">
+                        <input type="submit" value = "Apply" class="button" >
+                    </form>
+                    {% endif %}             
+            </td>
+
+        </td> 
+    </tr>
+    <tr> 
+        <td colspan="3" style = "text-align:center" valign="bottom">  
+            <br>
+            <!-- include all the tags associated with the post-->
+            {% for tag in post.get_fields().all() %}
+                <span class="tagitem">{{ tag }}</span>
+            {% endfor %}
+        </td>
+    </tr>
+        
+</table>

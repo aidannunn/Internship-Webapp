@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Please fill out the form below</h1>
+    {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            
+                <p> {{ form.name.label }}</p>
+                <p> {{ form.name(class="forminput") }}</p>
+                <p> {{ form.name.error }}</p>
+                
+    
+                <p> {{ form.reference_name.label }}</p>
+                <p> {{ form.reference_name(class="forminput") }}</p>
+                <p> {{ form.reference_name.error }}</p>
+
+                <p> {{ form.reference_email.label }}</p>
+                <p> {{ form.reference_email(class="forminput") }}</p>
+                <p> {{ form.reference_email.error }}</p>
+
+                <p> {{ form.applicaton_body.label }}</p>
+                <p> {{ form.applicaton_body(class="forminput") }}</p>
+                <p> {{ form.applicaton_body.error }}</p>
+            
+            <p> {{ form.submit(class="button") }}</p>
+        </form>
+    {% endif %}
+
+
+  {% endblock %}

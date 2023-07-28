@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Welcome to the Research Hub!</h1>
+    {% if current_user.is_anonymous or current_user.role == 'Faculty' %}
+    <div class="postlist">
+        {% for post in posts %}
+        <div class="post-box">
+            {% include '_post.html' %}
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% else %}
+
+    <!-- for each field in the post, if that field is in the user's interests, include it in the post-->
+    <br>
+
+    <h2>Recommended Based on Your Interests</h2>
+    <div class="postlist">
+        {% for post in recommended_posts %}
+        <div class="post-box">
+            {% include '_post.html' %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Other Posts</h2>
+    <div class="postlist">
+        {% for post in other_posts %}
+        <div class="post-box">
+            {% include '_post.html' %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+{% endblock %}

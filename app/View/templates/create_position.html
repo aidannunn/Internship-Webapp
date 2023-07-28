@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Post New Research Position</h1>
+
+    {% if form %}
+
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>
+                <!--Displays the form item for the post's `title`.--> 
+                {{ form.title.label }}<br>
+                {{ form.title(class="formtitle") }}<br>
+                {{ form.title.error }}
+
+                <!-- Displays the form item for the post's `body`. -->  
+                {{ form.general_description.label }}<br>
+                {{ form.general_description(class="formbody") }}<br>
+                {{ form.general_description.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.time_commitment.label }}<br>
+                {{ form.time_commitment(class = "formitem") }}<br>
+                {{ form.time_commitment.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.start_date.label }}<br>
+                {{ form.start_date }}<br>
+                {{ form.start_date.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.end_date.label }}<br>
+                {{ form.end_date }}<br>
+                {{ form.end_date.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.qualifications.label }}<br>
+                {{ form.qualifications(class = "formitem") }}<br>
+                {{ form.qualifications.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.faculty_name.label }}<br>
+                {{ form.faculty_name(class = "formitem") }}<br>
+                {{ form.faculty_name.error }}
+
+                <!-- Displays the form item for the post's `time commitmeent`. -->  
+                {{ form.contact_information.label }}<br>
+                {{ form.contact_information(class = "formitem") }}<br>
+                {{ form.contact_information.error }}
+            </div>
+
+            <!-- Include the form item for `tag` selection. --> 
+            <br>
+            {{ form.research_fields (class="formselect") }} 
+
+            {{ form.submit(class="button") }}
+        </form>
+    {% endif %}
+
+
+  {% endblock %}
